@@ -1,0 +1,566 @@
+:root {
+    --ramaroo-ugc-youtube-red: #fe0900;
+    --ramaroo-ugc-blue: #1ca1e9;
+    --ramaroo-ugc-light-grey: #f2f2f2;
+    --ramaroo-ugc-white: #ffffff;
+    --ramaroo-ugc-white-50: rgba(255, 255, 255, 0.5);
+}
+
+/**,*/
+/*html {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*    font-size: 16px;*/
+/*}*/
+/**:hover {*/
+/*    background: none;*/
+/*}*/
+
+.ramaroo-ugc-container {
+    width: 154px;
+    height: 200px;
+    position: fixed;
+    bottom: 20px;
+    right: 15px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 99999;
+    box-shadow: rgba(0, 0, 0, 0.314) 0px 0px 4px 0px;
+    animation: 1.67s bounce;
+    -webkit-animation: 1.67s bounce;
+    overflow: hidden;
+}
+
+.ramaroo-video-extended {
+    width: 220px !important;
+    height: 360px !important;
+}
+
+@media only screen and (max-width: 480px) {
+    .ramaroo-ugc-container {
+        width: 152px !important;
+        height: 207px !important;
+        overflow: hidden;
+        box-shadow: none;
+    }
+
+    .ramaroo-video-extended {
+        width: 177px !important;
+        height: 320px !important;
+    }
+
+    button.ramaroo-ugc-close {
+        cursor: pointer;
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    button.ramaroo-ugc-close {
+        position: absolute;
+        top: 3px !important;
+        right: 0 !important;
+    }
+}
+
+@-webkit-keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        -webkit-transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-30px);
+    }
+    60% {
+        -webkit-transform: translateY(-15px);
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+video#ramaroo-video,
+video#ramaroo-preview-video {
+    width: 100%;
+    /* height: 100%; */
+    border-radius: 20px;
+}
+
+video.ramaroo-ugc-video-preview {
+    overflow: hidden;
+}
+
+.ramaroo-ugc-review-cover {
+    right: 0;
+    left: 0;
+    padding: 0 5px;
+    position: absolute;
+    bottom: 20px;
+    transition: all 0.2s ease;
+    /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)); */
+    border-radius: 0 0 6px 6px;
+}
+
+.ugc-open-review {
+    position: relative;
+    height: 8.4px;
+    margin-bottom: 2px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ugc-open-review span {
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: bold;
+}
+
+.ugc-video-controls {
+    right: 0;
+    left: 0;
+    padding: 10px 22px;
+    position: absolute;
+    bottom: 20px;
+    transition: all 0.2s ease;
+    /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)); */
+    border-radius: 0 0 6px 6px;
+}
+
+.ugc-video-controls.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.ugc-video-progress {
+    position: relative;
+    height: 6.4px;
+    margin-bottom: 10px;
+}
+
+progress.ramaroo-player-progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 6px;
+    width: 100%;
+    height: 6.4px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    border: none; /* Needed for Firefox */
+    color: #fff; /* For IE10 */
+    -webkit-appearance: none; /* Needed for WebKit/Blink */
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+progress.ramaroo-player-progress::-webkit-progress-bar {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+progress.ramaroo-player-progress::-webkit-progress-value {
+    background: var(--ramaroo-ugc-white);
+    border-radius: 6px;
+}
+
+progress.ramaroo-player-progress::-moz-progress-bar {
+    border: 1px solid transparent;
+    background: var(--ramaroo-ugc-white);
+    border-radius: 6px;
+}
+
+.ugc-seek {
+    position: absolute;
+    top: -1px;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+}
+
+.ugc-seek:hover + .ugc-seek-tooltip {
+    display: block;
+}
+
+.ugc-seek-tooltip {
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: -30px;
+    margin-left: -20px;
+    font-size: 12px;
+    padding: 3px;
+    content: attr(data-title);
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.ugc-bottom-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-ramaroo-player {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 100%;
+    height: 10%;
+    z-index: 99999;
+}
+
+.ramaroo-watermark {
+    z-index: 1;
+    position: absolute;
+    top: 9px;
+    left: 6px;
+    margin: 0.3rem 0.6rem;
+    line-height: 1.3rem;
+}
+
+.ugc-playback-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.67;
+    width: 45px;
+    height: 45px;
+}
+
+.ugc-playback-icons svg.ugc-play-btn,
+.ugc-playback-icons svg.ugc-pause-btn {
+    /* width: 3.50rem;
+	height: 3.50rem; */
+}
+
+button.ramaroo-ugc-play::before {
+    content: "";
+    display: none;
+}
+
+.ugc-left-controls {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+/* .ugc-volume-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.volume-controls input {
+    width: 100px;
+    opacity: 1;
+    transition: all 0.4s ease;
+}
+
+.ugc-volume-controls:hover input,
+.ugc-volume-controls input:focus {
+    width: 100px;
+    opacity: 1;
+} */
+
+button.ramaroo-ugc-play {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+}
+
+button.ramaroo-ugc-play:hover {
+    background: transparent;
+}
+
+/*Don't style button*/
+button.ugc-controls {
+    cursor: pointer;
+    position: relative;
+    margin-right: 7px;
+    font-size: 12px;
+    padding: 3px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+/* close button */
+button.ramaroo-ugc-close {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background: transparent;
+}
+
+button.ramaroo-ugc-close {
+    position: absolute;
+    top: 9px;
+    right: 6px;
+}
+
+button.ramaroo-ugc-close::before {
+    content: "";
+    display: none;
+}
+
+/* open review/toggle review button  */
+button.ugc-open-review {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    background: transparent;
+}
+
+button.ugc-open-review:hover {
+    background: transparent !important;
+}
+
+/* Toggle widget button */
+button.toggle-ramaroo-player-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #131313;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 4px;
+    width: 150px;
+    border: none;
+    cursor: pointer;
+}
+
+/* button.toggle-ramaroo-player-btn {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+} */
+
+/* Don't style button, this will affect the entire use css*/
+/* button * {
+    pointer-events: none;
+} */
+button.ugc-open-review::before,
+button.ramaroo-ugc-close::before,
+button.ramaroo-ugc-play::before,
+button.toggle-ramaroo-player-btn::before,
+button.ugc-controls::before {
+    content: attr(data-title);
+    position: absolute;
+    display: none;
+    right: 0;
+    top: -50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    word-break: keep-all;
+    white-space: pre;
+}
+
+button.ugc-controls:hover::before {
+    display: inline-block;
+}
+
+button#toggle-ramaroo-player:hover,
+button#ramaroo-ugc-close-preview:hover,
+button#ramaroo-ugc-play:hover,
+button#ramaroo-ugc-close:hover {
+    background: transparent;
+}
+
+.ugc-fullscreen-button {
+    margin-right: 0;
+}
+
+.ugc-pip-button svg {
+    width: 26px;
+    height: 26px;
+}
+
+.playback-animation {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -40px;
+    margin-top: -40px;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+input#ramaroo-player-seek[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 8.4px;
+    background: transparent;
+    cursor: pointer;
+}
+
+input#ramaroo-player-seek[type="range"]:focus {
+    outline: none;
+}
+
+input#ramaroo-player-seek[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 1.3px;
+    -webkit-appearance: none;
+    transition: all 0.4s ease;
+}
+
+input#ramaroo-player-seek[type="range"]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 16px;
+    background: var(--ramaroo-ugc-youtube-red);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-left: -1px;
+    display: none;
+    opacity: 0;
+}
+
+input#ramaroo-player-seek[type="range"]:focus::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+input#ramaroo-player-seek[type="range"].volume {
+    height: 5px;
+    background-color: #fff;
+}
+
+input#ramaroo-player-seek[type="range"].volume::-webkit-slider-runnable-track {
+    background-color: transparent;
+}
+
+input#ramaroo-player-seek[type="range"].volume::-webkit-slider-thumb {
+    margin-left: 0;
+    height: 14px;
+    width: 14px;
+    background: #fff;
+}
+
+input#ramaroo-player-seek[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: transparent;
+    border-radius: 1.3px;
+}
+
+input#ramaroo-player-seek[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    background: var(--ramaroo-ugc-light-grey);
+    cursor: pointer;
+    margin-top: 5px;
+    display: none;
+    opacity: 0;
+}
+
+input#ramaroo-player-seek[type="range"]:focus::-moz-range-track {
+    outline: none;
+}
+
+input#ramaroo-player-seek[type="range"].volume::-moz-range-thumb {
+    border: 1px solid #fff;
+    background: #fff;
+}
+
+.ugc-r-hidden {
+    display: none !important;
+}
+
+.ramaroo-ugc-no-shadow {
+    box-shadow: none !important;
+}
+
+/*If this reads the way I think, it should be removed*/
+svg {
+    cursor: pointer;
+}
+svg.ugc-playback-icons {
+    width: 34px;
+    height: 34px;
+    fill: #fff;
+    stroke: #fff;
+}
+svg.ramaroo-ugc-play-review-icon {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    stroke: #fff;
+}
+svg.ramaroo-ugc-close {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    stroke: #fff;
+}
+/* svg:not(#watermark-svg) {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    stroke: #fff;
+    cursor: pointer;
+} */
+
+.ramaroo-player-time {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.ramaroo-player-time span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-shadow: 0px 1.15px #888787;
+}
